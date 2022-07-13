@@ -1,0 +1,92 @@
+{
+	"name": "demo3",
+	"version": "2.5.5",
+	"private": true,
+	"resolutions": {
+		"antd-theme-webpack-plugin": "1.3.9",
+		"antd-theme-generator": "1.2.2"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^4.6.2",
+		"antd": "^4.19.2",
+		"classnames": "^2.3.0",
+		"css-vars-ponyfill": "^2.4.7",
+		"driver.js": "^0.9.8",
+		"es6-proxy-polyfill": "^2.1.1",
+		"lodash-decorators": "^6.0.1",
+		"lodash.clonedeep": "^4.5.0",
+		"lodash.debounce": "^4.0.8",
+		"lodash.isfunction": "^3.0.9",
+		"lodash.isstring": "^4.0.1",
+		"lodash.uniqueid": "^4.0.1",
+		"prop-types": "^15.7.2",
+		"qs": "^6.9.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"sinobest-functions": "^2.5.5",
+		"sinogear": "^2.5.5",
+		"sinogear-module-common": "^2.5.5",
+		"sinogear-module-engine": "^2.5.5",
+		"sinogear-module-example": "^2.5.5",
+		"sinogear-module-generator": "^2.5.5",
+		"sinogear-module-layout": "^2.5.5",
+		"sinogear-module-login": "^2.5.5",
+		"sinogear-module-management": "^2.5.5",
+		"sinogear-module-workflow": "^2.5.5",
+		"umi": "^3.5.21"
+	},
+	"devDependencies": {
+		"@antv/g6": "^4.5.1",
+		"@umijs/preset-react": "^1.8.21",
+		"babel-eslint": "^10.1.0",
+		"babel-plugin-import": "^1.13.3",
+		"concurrently": "^5.2.0",
+		"cross-env": "^7.0.2",
+		"enzyme": "^3.11.0",
+		"eslint": "^7.2.0",
+		"eslint-config-airbnb": "^18.1.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-import": "^2.21.2",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-prettier": "^3.1.3",
+		"eslint-plugin-react": "^7.20.0",
+		"file-loader": "^6.2.0",
+		"husky": "^4.2.5",
+		"jszip": "^3.6.0",
+		"lint-staged": "^10.2.9",
+		"numeral": "^2.0.6",
+		"prettier": "^2.0.5",
+		"rxjs-compat": "^6.5.5",
+		"sb-mock": "^1.0.0-beta.3",
+		"sg-umi-plugin-module-registered": "^0.1.12",
+		"sg-umi-plugin-rename": "^0.0.1",
+		"sinobest-frontend-cli": "^1.1.3",
+		"sinobest-gather-projectinfo": "^0.1.1-beta.4",
+		"stylelint": "^13.6.0",
+		"stylelint-config-standard": "^20.0.0",
+		"url-loader": "^4.1.1"
+	},
+	"pre-commit": [
+		"lint"
+	],
+	"scripts": {
+		"dev": "node before.dev.js && cross-env runEnv=develop umi dev",
+		"dev:no-proxy": "cross-env NO_PROXY=true contextPath= npm run dev",
+		"mock-run": "sb-mock run -p 3004 -t ./mock",
+		"mock-build": "sb-mock build -t ./mock",
+		"dev-mock": "concurrently -p \"[{name}]\" -n \"mock,roadhog\" -c \"bgMagenta.bold,bgBlue.bold\" \"npm run mock-run\" \"npm run dev\"",
+		"lint": "eslint --fix --ext .js src",
+		"build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 contextPath= NO_PROXY=true runEnv=demo umi build",
+		"build-test": "cross-env NODE_OPTIONS=--max-old-space-size=4096 contextPath= NO_PROXY=true runEnv=test umi build",
+		"build-integrate": "cross-env NODE_OPTIONS=--max-old-space-size=4096 contextPath= NO_PROXY=true runEnv=integrate umi build",
+		"test": "jest --config jest.json",
+		"precommit": "lint-staged",
+		"postinstall": "sf mfsu-build"
+	},
+	"lint-staged": {
+		"{src,mock,__tests__}/**/*.{js,json,css,md,less}": [
+			"prettier --write",
+			"git add"
+		]
+	}
+}

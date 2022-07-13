@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend-pro-dev:
+    container_name: sinogear-frontend-pro
+    restart: always
+    ports:
+      - 8000:80
+    image: sinogear/sinogear-frontend-pro
+    build:
+      context: ./
+      dockerfile: Dockerfile-nginx
+  frontend-pro-mock:
+    container_name: sinogear-frontend-pro-mock
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - /home/ggjs/jenkins/workspace/SinoGear-Frontend-Pro/node_modules:/app/node_modules
+    ports:
+      - '8006:8000'
+    image: sinogear/sinogear-frontend-pro-mock
+
+volumes:
+  logs-volume:
